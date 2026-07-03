@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/Validaciones_LATAM" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>

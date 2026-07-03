@@ -1,0 +1,11 @@
+pandas
+geopandas
+sqlalchemy
+rtree
+google-auth
+google-api-python-client
+google-generativeai
+fiona
+
+
+pip install pandas geopandas sqlalchemy rtree google-auth google-api-python-client google-generativeai fiona

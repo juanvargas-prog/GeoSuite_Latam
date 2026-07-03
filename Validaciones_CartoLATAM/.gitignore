@@ -1,0 +1,21 @@
+# ── CREDENCIALES — NUNCA subir al repositorio ─────────────────────────────────
+.env                     # variables de entorno con credenciales reales
+.env.team                # versión del equipo (también tiene credenciales)
+client_secret.json       # credenciales OAuth de Google Cloud
+*.json                   # cualquier JSON que pueda ser una cuenta de servicio
+!.env.example            # sí subir la plantilla vacía
+
+# ── PYTHON ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ── REPORTES GENERADOS LOCALMENTE ─────────────────────────────────────────────
+reporte_validacion_*/
+reporte_interno_*/
+reporte_entrega_*/
+
+# ── SISTEMA ───────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

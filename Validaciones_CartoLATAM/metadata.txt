@@ -1,0 +1,24 @@
+[general]
+name=Validaciones CartoLatam
+qgisMinimumVersion=3.16
+description=Herramienta de validación de calidad de datos GIS para capas vectoriales (vías, sitios, manzanas, geocódigos, topología).
+version=1.5.0
+author=Bryan Mora
+email=bryan.mora@servinformacion.com
+about=Valida campos de capas vectoriales contra reglas de negocio por país, cruza capas entre sí espacialmente, valida topología y genera reporte HTML con errores detallados. Soporta múltiples países de América Latina.
+repository=https://github.com/bryanmora-star/validaciones_cartolatam
+tracker=https://github.com/bryanmora-star/validaciones_cartolatam/issues
+tags=validacion,calidad,gis,vias,sitios,cartolatam,qc,topologia
+homepage=https://github.com/bryanmora-star/validaciones_cartolatam
+category=Vector
+hasProcessingProvider=no
+changelog=
+    1.5.0 - Corrige label "Enviando correo..." que quedaba pegado: aplica polling threading.Event en _enviar_bg
+    1.4.9 - Reemplaza QTimer cross-thread por polling en hilo principal (threading.Event)
+    1.4.8 - Diagnóstico visible: label "Enviando..." + error en barra QGIS + popup con traceback
+    1.4.7 - Reemplaza multiprocessing.Pool por ThreadPoolExecutor (fix PicklingError en plugin QGIS)
+    1.4.6 - Corrige RuntimeError en _activar_btn_html cuando btn_html es eliminado al reconstruir página
+    1.4.5 - Mueve label de estado de correo fuera del scroll (siempre visible); agrega logging a consola QGIS
+    1.4.4 - Corrige crash por QgsSpatialIndex concurrente en validación topológica (max_workers=1)
+    1.4.3 - Corrige generación de reporte y envío de correo que quedaban bloqueados (QTimer cross-thread fix)
+    1.4.2 - Validación de documentación, cruce placa-mavvial, Drive integration
