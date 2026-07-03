@@ -6,7 +6,7 @@
 name=GeoSuite_Latam
 qgisMinimumVersion=3.0
 description=Herramienta de estandarizacion y analisis de informacion cartografica
-version=0.1
+version=1.0.0
 author=Automatizaciones Data Gis
 email=juan.vargas@servinformacion.com
 
