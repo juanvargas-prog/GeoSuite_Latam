@@ -28,7 +28,7 @@ class Validaciones_LATAM:
             QCoreApplication.installTranslator(self.translator)
 
         self.actions = []
-        self.menu = self.tr(u'&Validaciones_LATAM')
+        self.menu = self.tr(u'&GeoSuite LATAM')
         self.first_start = None
         # Referencia al DockWidget (None si no está creado)
         self._dock = None
