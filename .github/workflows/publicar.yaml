@@ -3,11 +3,13 @@ name: Generar ZIP del Complemento
 on:
   push:
     branches:
-      - main  # Se activa cada vez que subes cambios a la rama main
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Permiso obligatorio para crear el Release
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
@@ -15,12 +17,15 @@ jobs:
       - name: Crear carpeta limpia y comprimir
         run: |
           mkdir GeoSuite_Latam
-          # Copia todo excepto las carpetas de Git y el propio workflow
           rsync -av --exclude='.git*' --exclude='.github' ./ GeoSuite_Latam/
           zip -r GeoSuite_Latam.zip GeoSuite_Latam/
 
-      - name: Subir el ZIP a una sección pública (Artifact)
-        uses: actions/upload-artifact@v4
+      - name: Publicar ZIP en Release Automático
+        uses: "marvinpinto/action-automatic-releases@latest"  # Reemplazo oficial y actualizado
         with:
-          name: complemento-zip
-          path: GeoSuite_Latam.zip
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Última Versión Estable (Automatizada)"
+          files: |
+            GeoSuite_Latam.zip
