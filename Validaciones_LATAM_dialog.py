@@ -22,7 +22,7 @@
  ***************************************************************************/
 """
 from .comprobar_campos_LATAM import validar_campos
-from .ui_layout import _apply_dark_theme as apply_dark_theme, _rebuild_layout as rebuild_layout
+from .ui_layout import _apply_dark_theme as apply_dark_theme, _rebuild_layout as rebuild_layout, _apply_theme_by_mode as apply_theme_by_mode, _force_combo_dark as force_combo_dark, _switch_module as switch_module
 
 from qgis.core import QgsGeometry, QgsFeature, QgsVectorLayer, QgsSpatialIndex, QgsPointXY
 import processing
@@ -137,7 +137,10 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def _init_shared(self):
         """Inicialización compartida entre el modo QDialog y el modo QDockWidget."""
-        self._apply_dark_theme()   # Tema visual Dark GIS Pro
+        from qgis.PyQt.QtCore import QSettings
+        # Cargar tema guardado (por defecto oscuro = True)
+        self._is_dark_mode = QSettings().value("GeoSuite_Latam/dark_mode", True, type=bool)
+
         self.init_combo_paises()   # Inicializa el combo de paises
         self.limpiar_combos()
         self.cargar_capas_filtradas()
@@ -164,10 +167,16 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
         # --- Reconstruir layout con sidebar ---
         self._rebuild_layout()
 
+        # --- Aplicar tema ---
+        self.apply_theme(self._is_dark_mode)
+
         # --- Conexiones de widgets creados por _rebuild_layout (post-build) ---
         self.PBexportar_capas_NG.clicked.connect(self.exportar_capas_NG)
         self.CBselectScheme.currentIndexChanged.connect(self.actualizar_lista_exportacion)
         self.CBselectDatabase.currentIndexChanged.connect(self.actualizar_lista_exportacion)
+        # Conexión del botón de alternancia de tema
+        self.PBtheme.clicked.connect(self.toggle_theme)
+
         # Poblar lista de exportación con el esquema inicial
         self.actualizar_lista_exportacion()
         # Conexión del botón Generar Acta de Entrega
@@ -177,9 +186,75 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
         self.PBcheck_update_val_latam.clicked.connect(self.check_update_val_latam)
 
     def _apply_dark_theme(self):
-        apply_dark_theme(self)
+        self.apply_theme(True)
+
     def _rebuild_layout(self):
         rebuild_layout(self)
+
+    def apply_theme(self, dark_mode):
+        """Aplica el tema visual (oscuro o claro) y persiste el estado."""
+        self._is_dark_mode = dark_mode
+        from qgis.PyQt.QtCore import QSettings
+        QSettings().setValue("GeoSuite_Latam/dark_mode", dark_mode)
+
+        # Aplicar el stylesheet de ui_layout
+        apply_theme_by_mode(self, dark_mode)
+
+        # Forzar estilos en combos específicos
+        force_combo_dark(self)
+
+        # Actualizar botón
+        if hasattr(self, 'PBtheme') and self.PBtheme is not None:
+            self.PBtheme.setText("☀️ Modo Claro" if dark_mode else "🌙 Modo Oscuro")
+
+        # Actualizar sidebar buttons
+        if hasattr(self, '_stack') and self._stack is not None:
+            switch_module(self, self._stack.currentIndex())
+
+        # Refrescar carrusel si está inicializado (para dot/placeholder styles)
+        if hasattr(self, '_carousel_idx') and hasattr(self, '_carousel_dots'):
+            # El carrusel se actualiza en el próximo timeout, pero forzamos recarga del dot style
+            for i, dot in enumerate(self._carousel_dots):
+                if dark_mode:
+                    dot.setStyleSheet(
+                        "color:#10b981;font-size:10pt;background:transparent;border:none;"
+                        if i == self._carousel_idx else
+                        "color:#30363d;font-size:8pt;background:transparent;border:none;"
+                    )
+                else:
+                    dot.setStyleSheet(
+                        "color:#1a7f37;font-size:10pt;background:transparent;border:none;"
+                        if i == self._carousel_idx else
+                        "color:#d0d7de;font-size:8pt;background:transparent;border:none;"
+                    )
+            # Refrescar placeholder del carrusel si no hay imagen cargada (comprobar si hay pixmap)
+            if hasattr(self, '_carousel_lbl') and self._carousel_lbl.pixmap() and self._carousel_lbl.pixmap().isNull():
+                pais = ["mexico", "brasil", "guatemala", "peru", "argentina", "chile"][self._carousel_idx]
+                self._carousel_lbl.setText(f"📁  Coloca {pais}.png en la carpeta images/")
+                if dark_mode:
+                    self._carousel_lbl.setStyleSheet(
+                        "color:#484f58;font-size:9pt;background:#0d1117;"
+                        "border-radius:8px;border:1px dashed #30363d;"
+                    )
+                else:
+                    self._carousel_lbl.setStyleSheet(
+                        "color:#8c959f;font-size:9pt;background:#ffffff;"
+                        "border-radius:8px;border:1px dashed #d0d7de;"
+                    )
+
+        # Refrescar tabla de exportación (widgets embebidos en celdas tienen estilos inline)
+        if hasattr(self, 'QTW_export_capas') and self.QTW_export_capas is not None:
+            self.actualizar_lista_exportacion()
+        # Refrescar campo "Archivo CSV" de Nexa AI (estilos inline en sub-widgets del QgsFileWidget)
+        if hasattr(self, '_style_rutaIA'):
+            self._style_rutaIA()
+        # Refrescar campo "Carpeta de Salida" de Actas (estilos inline en sub-widgets del QgsFileWidget)
+        if hasattr(self, '_style_carpetaActa'):
+            self._style_carpetaActa()
+
+    def toggle_theme(self):
+        """Alterna entre el modo claro y oscuro."""
+        self.apply_theme(not self._is_dark_mode)
     
     def init_combo_paises(self):
 
@@ -1330,17 +1405,31 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
             "Trinidad": "TT"
         }
 
-        _combo_dark = (
-            "QComboBox{background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
-            "border-radius:4px;padding:2px 6px;font-size:8pt;}"
-            "QComboBox:hover{border-color:#58a6ff;}"
-            "QComboBox::drop-down{border:none;width:18px;}"
-            "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
-            "border-right:4px solid transparent;border-top:5px solid #8b949e;margin-right:4px;}"
-            "QComboBox QAbstractItemView{background:#1f2937;color:#e6edf3;"
-            "border:1px solid #30363d;selection-background-color:#1d4ed8;"
-            "selection-color:#fff;outline:none;}"
-        )
+        _dark = getattr(self, '_is_dark_mode', True)
+        if _dark:
+            _combo_dark = (
+                "QComboBox{background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
+                "border-radius:4px;padding:2px 6px;font-size:8pt;}"
+                "QComboBox:hover{border-color:#58a6ff;}"
+                "QComboBox::drop-down{border:none;width:18px;}"
+                "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
+                "border-right:4px solid transparent;border-top:5px solid #8b949e;margin-right:4px;}"
+                "QComboBox QAbstractItemView{background:#1f2937;color:#e6edf3;"
+                "border:1px solid #30363d;selection-background-color:#1d4ed8;"
+                "selection-color:#fff;outline:none;}"
+            )
+        else:
+            _combo_dark = (
+                "QComboBox{background:#ffffff;color:#24292f;border:1px solid #d0d7de;"
+                "border-radius:4px;padding:2px 6px;font-size:8pt;}"
+                "QComboBox:hover{border-color:#0969da;}"
+                "QComboBox::drop-down{border:none;width:18px;}"
+                "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
+                "border-right:4px solid transparent;border-top:5px solid #57606a;margin-right:4px;}"
+                "QComboBox QAbstractItemView{background:#ffffff;color:#24292f;"
+                "border:1px solid #d0d7de;selection-background-color:#0969da;"
+                "selection-color:#fff;outline:none;}"
+            )
 
         self.QTW_export_capas.setRowCount(0)
 
@@ -1398,20 +1487,36 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
             # ── 3. Poblar tabla: una fila por capa ────────────────────────
             from PyQt5.QtWidgets import QCheckBox, QLineEdit, QWidget, QHBoxLayout
 
-            _le_dark = (
-                "QLineEdit{background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
-                "border-radius:4px;padding:2px 6px;font-size:8pt;}"
-                "QLineEdit:hover{border-color:#58a6ff;}"
-                "QLineEdit:focus{border-color:#3b82f6;background:#1c2333;}"
-                "QLineEdit:disabled{background:#161b22;color:#484f58;border-color:#21262d;}"
-            )
-            _chk_dark = (
-                "QCheckBox{color:#c9d1d9;background:transparent;border:none;font-size:8pt;}"
-                "QCheckBox::indicator{width:14px;height:14px;border:2px solid #30363d;"
-                "border-radius:3px;background:#1f2937;}"
-                "QCheckBox::indicator:hover{border-color:#58a6ff;}"
-                "QCheckBox::indicator:checked{background:#1d4ed8;border-color:#3b82f6;}"
-            )
+            if _dark:
+                _le_dark = (
+                    "QLineEdit{background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
+                    "border-radius:4px;padding:2px 6px;font-size:8pt;}"
+                    "QLineEdit:hover{border-color:#58a6ff;}"
+                    "QLineEdit:focus{border-color:#3b82f6;background:#1c2333;}"
+                    "QLineEdit:disabled{background:#161b22;color:#484f58;border-color:#21262d;}"
+                )
+                _chk_dark = (
+                    "QCheckBox{color:#c9d1d9;background:transparent;border:none;font-size:8pt;}"
+                    "QCheckBox::indicator{width:14px;height:14px;border:2px solid #30363d;"
+                    "border-radius:3px;background:#1f2937;}"
+                    "QCheckBox::indicator:hover{border-color:#58a6ff;}"
+                    "QCheckBox::indicator:checked{background:#1d4ed8;border-color:#3b82f6;}"
+                )
+            else:
+                _le_dark = (
+                    "QLineEdit{background:#ffffff;color:#24292f;border:1px solid #d0d7de;"
+                    "border-radius:4px;padding:2px 6px;font-size:8pt;}"
+                    "QLineEdit:hover{border-color:#0969da;}"
+                    "QLineEdit:focus{border-color:#0969da;background:#ffffff;}"
+                    "QLineEdit:disabled{background:#f6f8fa;color:#8c959f;border-color:#e1e4e8;}"
+                )
+                _chk_dark = (
+                    "QCheckBox{color:#24292f;background:transparent;border:none;font-size:8pt;}"
+                    "QCheckBox::indicator{width:14px;height:14px;border:2px solid #d0d7de;"
+                    "border-radius:3px;background:#ffffff;}"
+                    "QCheckBox::indicator:hover{border-color:#0969da;}"
+                    "QCheckBox::indicator:checked{background:#0969da;border-color:#0969da;}"
+                )
 
             self.QTW_export_capas.setRowCount(len(nombres))
             for row_idx, nombre in enumerate(nombres):
@@ -1492,6 +1597,7 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
 
             self.QTW_export_capas.resizeRowsToContents()
             self.progressBar.setValue(100)
+            self.progressBar.setValue(0)
 
         except Exception as e:
             self.mostrarProceso.setText(f'❌ Error al cargar tablas: {str(e)}')

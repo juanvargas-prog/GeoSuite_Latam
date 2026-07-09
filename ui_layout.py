@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 ui_layout.py
 Capa de presentacion — Dark GIS Pro v2
@@ -781,8 +781,1094 @@ def _apply_dark_theme(dlg):
     QScrollBar::sub-page:horizontal {
         background: none;
     }
+
+    /* === VALIDACIONES LATAM (dark) === */
+    QScrollArea#valLatamScroll {
+        background: #0d1117;
+        border: none;
+    }
+    QScrollArea#valLatamScroll QScrollBar:vertical {
+        background: #0d1117;
+        width: 6px;
+    }
+    QScrollArea#valLatamScroll QScrollBar::handle:vertical {
+        background: #30363d;
+        border-radius: 3px;
+    }
+
+    QWidget#valLatamInner {
+        background: #0d1117;
+    }
+
+    QFrame#valLatamHdrFrame {
+        background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+            stop:0 #022c22, stop:0.5 #064e3b, stop:1 #0d1117);
+        border-radius: 12px;
+        border: 1px solid #10b981;
+    }
+
+    QLabel#valLatamTitle {
+        color: #34d399;
+        font-size: 18pt;
+        font-weight: 800;
+        background: transparent;
+        border: none;
+        letter-spacing: 1px;
+    }
+
+    QLabel#valLatamSub {
+        color: #6ee7b7;
+        font-size: 9pt;
+        font-weight: 500;
+        background: transparent;
+        border: none;
+    }
+
+    QLabel#valLatamDesc {
+        color: #c9d1d9;
+        font-size: 8.5pt;
+        line-height: 1.6;
+        background: transparent;
+        border: none;
+    }
+
+    QLabel#carouselLabel {
+        background: #161b22;
+        border-radius: 8px;
+        border: 1px solid #30363d;
+    }
+
+    QLabel#carouselPaisLbl {
+        color: #34d399;
+        font-size: 8pt;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    }
+
+    QPushButton#PBcheck_update_val_latam {
+        background-color: #21262d;
+        color: #c9d1d9;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        font-size: 8.5pt;
+        font-weight: 500;
+        padding: 4px 14px;
+    }
+    QPushButton#PBcheck_update_val_latam:hover {
+        background-color: #30363d;
+        color: #e6edf3;
+        border-color: #58a6ff;
+    }
+    QPushButton#PBcheck_update_val_latam:pressed {
+        background-color: #161b22;
+    }
+
+    /* === EXPORTACIÓN (dark) === */
+    QTableWidget#exportCapasTable {
+        background: #0d1117;
+        color: #e6edf3;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        gridline-color: #21262d;
+        font-size: 8.5pt;
+    }
+    QTableWidget#exportCapasTable::item {
+        padding: 3px 6px;
+        color: #e6edf3;
+        background: #0d1117;
+    }
+    QTableWidget#exportCapasTable::item:selected {
+        background: #21262d;
+        color: #e6edf3;
+    }
+    QTableWidget#exportCapasTable QHeaderView::section {
+        background: #161b22;
+        color: #58a6ff;
+        border: none;
+        border-bottom: 1px solid #30363d;
+        padding: 4px 8px;
+        font-weight: 700;
+        font-size: 8pt;
+    }
+
+    QCheckBox#driveUploadCB {
+        color: #c9d1d9;
+        background: transparent;
+        border: none;
+        font-size: 8.5pt;
+        font-weight: 600;
+        spacing: 6px;
+    }
+    QCheckBox#driveUploadCB::indicator {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #30363d;
+        border-radius: 4px;
+        background: #0d1117;
+    }
+    QCheckBox#driveUploadCB::indicator:hover {
+        border-color: #58a6ff;
+    }
+    QCheckBox#driveUploadCB::indicator:checked {
+        background: #3b82f6;
+        border-color: #3b82f6;
+    }
+    QCheckBox#driveUploadCB:hover {
+        color: #58a6ff;
+    }
+
+    QLineEdit#driveFolderIDLE {
+        background: #0d1117;
+        color: #8b949e;
+        border: 1px solid #30363d;
+        border-radius: 5px;
+        padding: 4px 8px;
+        font-size: 8.5pt;
+    }
+    QLineEdit#driveFolderIDLE:enabled {
+        background: #161b22;
+        color: #e6edf3;
+        border: 1px solid #30363d;
+    }
+    QLineEdit#driveFolderIDLE:enabled:hover {
+        border-color: #58a6ff;
+    }
+    QLineEdit#driveFolderIDLE:enabled:focus {
+        border-color: #3b82f6;
+        background: #161b22;
+    }
     """
     dlg.setStyleSheet(qss)
+
+def _apply_light_theme(dlg):
+    """Aplica el tema claro 'Light GIS Pro' al plugin via QSS."""
+    qss = """
+    /* =====================================================================
+       LIGHT GIS PRO - Validaciones LATAM
+       ===================================================================== */
+
+    /* === DIALOG BASE === */
+    QDialog {
+        background-color: #f6f8fa;
+        color: #24292f;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 9pt;
+    }
+
+    /* === FRAMES / PANELES === */
+    QFrame {
+        background-color: #ffffff;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+    }
+    QFrame[frameShape="0"] {
+        border: none;
+        background-color: transparent;
+    }
+
+    /* === LABELS === */
+    QLabel {
+        color: #57606a;
+        background-color: transparent;
+        border: none;
+        font-size: 8.5pt;
+        font-weight: 500;
+    }
+
+    /* === COLLAPSIBLE GROUP BOX === */
+    QgsCollapsibleGroupBox, QgsCollapsibleGroupBoxBasic, QGroupBox {
+        background-color: #ffffff;
+        border: 1px solid #d0d7de;
+        border-radius: 8px;
+        margin-top: 14px;
+        padding-top: 8px;
+        color: #24292f;
+        font-weight: 600;
+        font-size: 8.5pt;
+    }
+    QgsCollapsibleGroupBox::title, QgsCollapsibleGroupBoxBasic::title, QGroupBox::title {
+        subcontrol-origin: margin;
+        subcontrol-position: top left;
+        color: #0969da;
+        padding: 0 6px;
+        left: 10px;
+        top: 2px;
+    }
+
+    /* === TAB WIDGET === */
+    QTabWidget::pane {
+        background-color: #ffffff;
+        border: 1px solid #d0d7de;
+        border-radius: 0px 6px 6px 6px;
+        top: -1px;
+    }
+    QTabBar {
+        background-color: transparent;
+    }
+    QTabBar::tab {
+        background-color: #f6f8fa;
+        color: #57606a;
+        border: 1px solid #d0d7de;
+        border-bottom: none;
+        padding: 7px 14px;
+        margin-right: 2px;
+        border-radius: 6px 6px 0px 0px;
+        font-weight: 500;
+        font-size: 8.5pt;
+        min-width: 80px;
+    }
+    QTabBar::tab:selected {
+        background-color: #ffffff;
+        color: #0969da;
+        border-bottom: 2px solid #0969da;
+        font-weight: 700;
+    }
+    QTabBar::tab:hover:!selected {
+        background-color: #eaeef2;
+        color: #24292f;
+    }
+
+    /* === COMBO BOX (nativos Qt) === */
+    QComboBox {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 5px;
+        padding: 4px 8px;
+        selection-background-color: #0969da;
+        font-size: 8.5pt;
+    }
+    QComboBox:hover {
+        border: 1px solid #0969da;
+    }
+    QComboBox:focus {
+        border: 1px solid #0969da;
+    }
+    QComboBox::drop-down {
+        border: none;
+        width: 22px;
+    }
+    QComboBox::down-arrow {
+        image: none;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid #57606a;
+        width: 0;
+        height: 0;
+        margin-right: 6px;
+    }
+    QComboBox QAbstractItemView {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        selection-background-color: #0969da;
+        selection-color: #ffffff;
+        outline: none;
+    }
+
+    /* === LINE EDIT === */
+    QLineEdit {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 5px;
+        padding: 5px 8px;
+        selection-background-color: #0969da;
+        font-size: 8.5pt;
+    }
+    QLineEdit:hover {
+        border: 1px solid #0969da;
+    }
+    QLineEdit:focus {
+        border: 1px solid #0969da;
+        background-color: #ffffff;
+    }
+
+    /* === CHECKBOXES === */
+    QCheckBox {
+        color: #24292f;
+        background-color: transparent;
+        spacing: 8px;
+        font-size: 8.5pt;
+        border: none;
+    }
+    QCheckBox::indicator {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #d0d7de;
+        border-radius: 4px;
+        background-color: #ffffff;
+    }
+    QCheckBox::indicator:hover {
+        border: 2px solid #0969da;
+    }
+    QCheckBox::indicator:checked {
+        background-color: #0969da;
+        border: 2px solid #0969da;
+        image: none;
+    }
+    QCheckBox::indicator:checked:hover {
+        background-color: #0255b3;
+        border: 2px solid #0255b3;
+    }
+    QCheckBox:hover {
+        color: #0969da;
+    }
+
+    /* === BOTONES BASE === */
+    QPushButton {
+        background-color: #f6f8fa;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        padding: 6px 14px;
+        font-weight: 600;
+        font-size: 8.5pt;
+        min-height: 26px;
+    }
+    QPushButton:hover {
+        background-color: #f3f4f6;
+        color: #24292f;
+        border: 1px solid #0969da;
+    }
+    QPushButton:pressed {
+        background-color: #ebecf0;
+    }
+    QPushButton:disabled {
+        color: #8c959f;
+        border-color: #e1e4e8;
+        background-color: #f6f8fa;
+    }
+
+    /* === BOTON VALIDAR (azul) === */
+    QPushButton#PBvalidar_mv,
+    QPushButton#PBval_pl,
+    QPushButton#PBval_Campos {
+        background-color: #0969da;
+        color: #ffffff;
+        border: 1px solid #0969da;
+    }
+    QPushButton#PBvalidar_mv:hover,
+    QPushButton#PBval_pl:hover,
+    QPushButton#PBval_Campos:hover {
+        background-color: #0255b3;
+        border: 1px solid #0255b3;
+    }
+    QPushButton#PBvalidar_mv:pressed,
+    QPushButton#PBval_pl:pressed,
+    QPushButton#PBval_Campos:pressed {
+        background-color: #0a4b99;
+    }
+
+    /* === BOTON ESTANDARIZAR (ámbar) === */
+    QPushButton#PB_estandarizar,
+    QPushButton#PBEstand_pl {
+        background-color: #9a6700;
+        color: #ffffff;
+        border: 1px solid #9a6700;
+    }
+    QPushButton#PB_estandarizar:hover,
+    QPushButton#PBEstand_pl:hover {
+        background-color: #7b5200;
+        border: 1px solid #7b5200;
+        color: #ffffff;
+    }
+    QPushButton#PB_estandarizar:pressed,
+    QPushButton#PBEstand_pl:pressed {
+        background-color: #5c3e00;
+    }
+
+    /* === BOTON EXPORTAR (verde) === */
+    QPushButton#PBexportarcapa,
+    QPushButton#PBexportargdb {
+        background-color: #1a7f37;
+        color: #ffffff;
+        border: 1px solid #1a7f37;
+    }
+    QPushButton#PBexportarcapa:hover,
+    QPushButton#PBexportargdb:hover {
+        background-color: #116325;
+        border: 1px solid #116325;
+        color: #ffffff;
+    }
+    QPushButton#PBexportarcapa:pressed,
+    QPushButton#PBexportargdb:pressed {
+        background-color: #0d4d1c;
+    }
+
+    /* === BOTON IA NEXA (purpura gradiente) === */
+    QPushButton#PB_Estandarizar_IA {
+        background-color: #6f2da8;
+        color: #ffffff;
+        border: 1px solid #6f2da8;
+        font-weight: 700;
+    }
+    QPushButton#PB_Estandarizar_IA:hover {
+        background-color: #582486;
+        border: 1px solid #582486;
+        color: #ffffff;
+    }
+    QPushButton#PB_Estandarizar_IA:pressed {
+        background-color: #401a62;
+    }
+
+    /* === BOTON CONTINUIDAD (indigo) === */
+    QPushButton#valContinuidad {
+        background-color: #3c46ab;
+        color: #ffffff;
+        border: 1px solid #3c46ab;
+    }
+    QPushButton#valContinuidad:hover {
+        background-color: #2e3582;
+        border: 1px solid #2e3582;
+        color: #ffffff;
+    }
+
+    /* === BOTON TOPOLOGIA === */
+    QPushButton#PBval_Campos_2 {
+        background-color: #eaeef2;
+        color: #57606a;
+        border: 1px solid #d0d7de;
+    }
+    QPushButton#PBval_Campos_2:hover {
+        background-color: #d0d7de;
+        border: 1px solid #afb8c1;
+        color: #24292f;
+    }
+
+    /* === BOTON GENERAR ACTA (cian/teal) === */
+    QPushButton#PBgenerar_acta {
+        background-color: #007791;
+        color: #ffffff;
+        border: 1px solid #007791;
+        border-radius: 6px;
+        font-size: 9pt;
+        font-weight: 700;
+        padding: 6px 16px;
+    }
+    QPushButton#PBgenerar_acta:hover {
+        background-color: #005f74;
+        border-color: #005f74;
+        color: #ffffff;
+    }
+    QPushButton#PBgenerar_acta:pressed {
+        background-color: #004758;
+    }
+
+    /* === BOTON INICIAR VALIDACIONES LATAM (verde esmeralda) === */
+    QPushButton#PBiniciar_val_latam {
+        background-color: #1f8a6b;
+        color: #ffffff;
+        border: 1px solid #1f8a6b;
+        border-radius: 8px;
+        font-size: 11pt;
+        font-weight: 700;
+        padding: 10px 24px;
+        min-height: 44px;
+    }
+    QPushButton#PBiniciar_val_latam:hover {
+        background-color: #145c47;
+        border-color: #145c47;
+        color: #ffffff;
+    }
+    QPushButton#PBiniciar_val_latam:pressed {
+        background-color: #0b3428;
+    }
+
+    /* === BOTON AYUDA (secundario) y TEMA === */
+    QPushButton#PBayuda, QPushButton#PBtheme {
+        background-color: #f6f8fa;
+        color: #57606a;
+        border: 1px solid #d0d7de;
+        padding: 4px 10px;
+        min-height: 22px;
+    }
+    QPushButton#PBayuda:hover, QPushButton#PBtheme:hover {
+        background-color: #eaeef2;
+        color: #24292f;
+        border-color: #0969da;
+    }
+
+    /* === TEXT EDIT - MOSTRAR PROCESO === */
+    QTextEdit#mostrarProceso {
+        background-color: #f6f8fa;
+        color: #1a7f37;
+        border: 1px solid #2da44e;
+        border-left: 3px solid #2da44e;
+        border-radius: 5px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 8pt;
+        padding: 4px;
+    }
+
+    /* === TEXT EDIT - RESULTADOS === */
+    QTextEdit#textEdit {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 5px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 8pt;
+        padding: 4px;
+    }
+
+    /* === PROGRESS BAR === */
+    QProgressBar {
+        background-color: #eaeef2;
+        border: 1px solid #d0d7de;
+        border-radius: 8px;
+        height: 10px;
+        text-align: center;
+        color: transparent;
+    }
+    QProgressBar::chunk {
+        background-color: qlineargradient(
+            x1:0, y1:0, x2:1, y2:0,
+            stop:0 #0969da,
+            stop:0.5 #3b82f6,
+            stop:1 #2da44e
+        );
+        border-radius: 8px;
+    }
+
+    /* === SCROLL BARS === */
+    QScrollBar:vertical {
+        background-color: #f6f8fa;
+        width: 8px;
+        border-radius: 4px;
+    }
+    QScrollBar::handle:vertical {
+        background-color: #d0d7de;
+        border-radius: 4px;
+        min-height: 20px;
+    }
+    QScrollBar::handle:vertical:hover {
+        background-color: #0969da;
+    }
+    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        height: 0px;
+    }
+    QScrollBar:horizontal {
+        background-color: #f6f8fa;
+        height: 8px;
+        border-radius: 4px;
+    }
+    QScrollBar::handle:horizontal {
+        background-color: #d0d7de;
+        border-radius: 4px;
+        min-width: 20px;
+    }
+    QScrollBar::handle:horizontal:hover {
+        background-color: #0969da;
+    }
+    QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+        width: 0px;
+    }
+
+    /* === TOOLTIP === */
+    QToolTip {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #0969da;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 8pt;
+    }
+
+    /* === MENU / DROPDOWN === */
+    QMenu {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 4px;
+    }
+    QMenu::item:selected {
+        background-color: #0969da;
+        color: #ffffff;
+    }
+
+    /* === HEADER BAR === */
+    QFrame#headerBar {
+        background-color: #f6f8fa;
+        border: none;
+        border-bottom: 1px solid #d0d7de;
+        border-radius: 0px;
+    }
+    QLabel#headerTitle {
+        color: #24292f;
+        font-size: 13pt;
+        font-weight: 700;
+        background: transparent;
+        border: none;
+    }
+    QLabel#headerVersion {
+        color: #0969da;
+        font-size: 8.5pt;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    }
+
+    /* === SIDEBAR === */
+    QFrame#sidebar {
+        background-color: #f6f8fa;
+        border: none;
+        border-right: 1px solid #d0d7de;
+        border-radius: 0px;
+    }
+    QLabel#sidebarLabel {
+        color: #8c959f;
+        font-size: 7.5pt;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: transparent;
+        border: none;
+        padding: 4px 0px 2px 0px;
+    }
+    QLabel#sidebarFooter {
+        color: #afb8c1;
+        font-size: 7pt;
+        background: transparent;
+        border: none;
+    }
+    QPushButton#sidebarToggle {
+        background-color: #ffffff;
+        color: #0969da;
+        border: 1px solid #d0d7de;
+        border-radius: 4px;
+        font-size: 9pt;
+        font-weight: 700;
+        padding: 0px;
+    }
+    QPushButton#sidebarToggle:hover {
+        background-color: #f3f4f6;
+        border-color: #0969da;
+    }
+
+    /* === CONNECTION PANEL === */
+    QFrame#connectionPanel {
+        background-color: #f6f8fa;
+        border: none;
+        border-bottom: 1px solid #d0d7de;
+        border-radius: 0px;
+    }
+    QLabel#connLabel {
+        color: #0969da;
+        font-size: 8pt;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    }
+
+    /* === MODULE HEADER === */
+    QFrame#moduleHeader {
+        background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+            stop:0 #ffffff, stop:1 #f6f8fa);
+        border: none;
+        border-bottom: 1px solid #d0d7de;
+        border-radius: 0px;
+    }
+    QLabel#moduleTitle {
+        color: #24292f;
+        font-size: 11pt;
+        font-weight: 700;
+        background: transparent;
+        border: none;
+    }
+
+    /* === MODULE BODY === */
+    QFrame#moduleBody {
+        background-color: transparent;
+        border: none;
+    }
+    QFrame#sectionFrame {
+        background-color: #ffffff;
+        border: 1px solid #d0d7de;
+        border-radius: 8px;
+    }
+    QLabel#sectionTitle {
+        color: #0969da;
+        font-size: 8.5pt;
+        font-weight: 700;
+        background: transparent;
+        border: none;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #d0d7de;
+    }
+    QLabel#layerLabel {
+        color: #57606a;
+        font-size: 8pt;
+        background: transparent;
+        border: none;
+    }
+    QLabel#descLabel {
+        color: #57606a;
+        font-size: 8.5pt;
+        background: transparent;
+        border: none;
+        line-height: 1.4;
+    }
+    QLabel#infoLabel {
+        color: #0969da;
+        font-size: 8pt;
+        background: transparent;
+        border: none;
+    }
+    QFrame#actionBar {
+        background-color: transparent;
+        border: none;
+        border-top: 1px solid #d0d7de;
+    }
+
+    /* === NEXA HEADER === */
+    QFrame#nexaHeader {
+        background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+            stop:0 #f5f0ff, stop:0.5 #e8daff, stop:1 #f5f0ff);
+        border: none;
+        border-bottom: 1px solid #6f2da8;
+        border-radius: 0px;
+    }
+    QLabel#nexaTitle {
+        color: #5c2497;
+        font-size: 11pt;
+        font-weight: 700;
+        background: transparent;
+        border: none;
+    }
+    QLabel#nexaSubtitle {
+        color: #6f2da8;
+        font-size: 8pt;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    }
+    QPushButton#togglePwd {
+        background-color: #ffffff;
+        color: #57606a;
+        border: 1px solid #d0d7de;
+        border-radius: 4px;
+        font-size: 11pt;
+        padding: 0px;
+    }
+    QPushButton#togglePwd:checked {
+        background-color: #0969da;
+        color: #ffffff;
+        border-color: #0969da;
+    }
+
+    /* === STACKED / RIGHT PANEL === */
+    QStackedWidget#mainStack {
+        background-color: #f6f8fa;
+        border: none;
+    }
+    QWidget#rightPanel {
+        background-color: #f6f8fa;
+    }
+    QWidget#body {
+        background-color: #f6f8fa;
+    }
+
+    /* === EXPORT NG — LISTA DE CAPAS === */
+    QListWidget#QLW_export_capas {
+        background-color: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        font-size: 8.5pt;
+        padding: 4px;
+        outline: none;
+    }
+    QListWidget#QLW_export_capas::item {
+        padding: 3px 6px;
+        border-radius: 4px;
+    }
+    QListWidget#QLW_export_capas::item:hover {
+        background-color: #eaeef2;
+    }
+    QListWidget#QLW_export_capas::item:selected {
+        background-color: transparent;
+        color: #24292f;
+    }
+
+    /* === EXPORT NG — CHECKBOX MAESTRO === */
+    QCheckBox#CB_seleccionar_todo {
+        color: #0969da;
+        font-size: 8.5pt;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+        spacing: 6px;
+    }
+    QCheckBox#CB_seleccionar_todo::indicator {
+        width: 14px;
+        height: 14px;
+        border: 1px solid #0969da;
+        border-radius: 3px;
+        background-color: #ffffff;
+    }
+    QCheckBox#CB_seleccionar_todo::indicator:checked {
+        background-color: #0969da;
+        border-color: #0969da;
+    }
+
+    /* === EXPORT NG — BOTÓN ACCIÓN === */
+    QPushButton#PBexportar_capas_NG {
+        background-color: #1a7f37;
+        color: #ffffff;
+        border: 1px solid #1a7f37;
+        border-radius: 6px;
+        font-size: 9pt;
+        font-weight: 700;
+        padding: 6px 16px;
+    }
+    QPushButton#PBexportar_capas_NG:hover {
+        background-color: #116325;
+        border-color: #116325;
+        color: #ffffff;
+    }
+    QPushButton#PBexportar_capas_NG:pressed {
+        background-color: #0d4d1c;
+    }
+
+    /* === SCROLLBAR GLOBAL (incluye dropdowns de QComboBox) === */
+    QScrollBar:vertical {
+        background: #f6f8fa;
+        width: 8px;
+        border: none;
+        border-radius: 4px;
+        margin: 0px;
+    }
+    QScrollBar::handle:vertical {
+        background: #d0d7de;
+        border-radius: 4px;
+        min-height: 20px;
+    }
+    QScrollBar::handle:vertical:hover {
+        background: #0969da;
+    }
+    QScrollBar::add-line:vertical,
+    QScrollBar::sub-line:vertical {
+        background: #eaeef2;
+        height: 14px;
+        border: none;
+        border-radius: 2px;
+        subcontrol-origin: margin;
+    }
+    QScrollBar::sub-line:vertical {
+        subcontrol-position: top;
+    }
+    QScrollBar::add-line:vertical {
+        subcontrol-position: bottom;
+    }
+    QScrollBar::up-arrow:vertical {
+        image: none;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-bottom: 5px solid #57606a;
+        width: 0px;
+        height: 0px;
+    }
+    QScrollBar::down-arrow:vertical {
+        image: none;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-top: 5px solid #57606a;
+        width: 0px;
+        height: 0px;
+    }
+    QScrollBar::add-page:vertical,
+    QScrollBar::sub-page:vertical {
+        background: none;
+    }
+    QScrollBar:horizontal {
+        background: #f6f8fa;
+        height: 8px;
+        border: none;
+        border-radius: 4px;
+        margin: 0px;
+    }
+    QScrollBar::handle:horizontal {
+        background: #d0d7de;
+        border-radius: 4px;
+        min-width: 20px;
+    }
+    QScrollBar::handle:horizontal:hover {
+        background: #0969da;
+    }
+    QScrollBar::add-line:horizontal,
+    QScrollBar::sub-line:horizontal {
+        background: none;
+        width: 0px;
+        border: none;
+    }
+    QScrollBar::add-page:horizontal,
+    QScrollBar::sub-page:horizontal {
+        background: none;
+    }
+
+    /* === NUEVOS ELEMENTOS CON OBJECT NAME === */
+    QScrollArea#valLatamScroll {
+        background: #f6f8fa;
+        border: none;
+    }
+    QScrollArea#valLatamScroll QScrollBar:vertical {
+        background: #f6f8fa;
+        width: 6px;
+    }
+    QScrollArea#valLatamScroll QScrollBar::handle:vertical {
+        background: #d0d7de;
+        border-radius: 3px;
+    }
+
+    QWidget#valLatamInner {
+        background: #f6f8fa;
+    }
+
+    QFrame#valLatamHdrFrame {
+        background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+            stop:0 #ebfbf5, stop:0.5 #d1fae5, stop:1 #ffffff);
+        border-radius: 12px;
+        border: 1px solid #2da44e;
+    }
+
+    QLabel#valLatamTitle {
+        color: #1a7f37;
+        font-size: 18pt;
+        font-weight: 800;
+        background: transparent;
+        border: none;
+        letter-spacing: 1px;
+    }
+
+    QLabel#valLatamSub {
+        color: #22863a;
+        font-size: 9pt;
+        font-weight: 500;
+        background: transparent;
+        border: none;
+    }
+
+    QLabel#valLatamDesc {
+        color: #24292f;
+        font-size: 8.5pt;
+        line-height: 1.6;
+        background: transparent;
+        border: none;
+    }
+
+    QLabel#carouselLabel {
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #d0d7de;
+    }
+
+    QLabel#carouselPaisLbl {
+        color: #1a7f37;
+        font-size: 8pt;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    }
+
+    QPushButton#PBcheck_update_val_latam {
+        background-color: #f6f8fa;
+        color: #57606a;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        font-size: 8.5pt;
+        font-weight: 500;
+        padding: 4px 14px;
+    }
+    QPushButton#PBcheck_update_val_latam:hover {
+        background-color: #eaeef2;
+        color: #24292f;
+        border-color: #0969da;
+    }
+    QPushButton#PBcheck_update_val_latam:pressed {
+        background-color: #ebecf0;
+    }
+
+    /* === EXPORTACIÓN CONFIGURADA POR OBJECT NAME === */
+    QTableWidget#exportCapasTable {
+        background: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        gridline-color: #eaeef2;
+        font-size: 8.5pt;
+    }
+    QTableWidget#exportCapasTable::item {
+        padding: 3px 6px;
+    }
+    QTableWidget#exportCapasTable::item:selected {
+        background: transparent;
+    }
+    QTableWidget#exportCapasTable QHeaderView::section {
+        background: #f6f8fa;
+        color: #0969da;
+        border: none;
+        border-bottom: 1px solid #d0d7de;
+        padding: 4px 8px;
+        font-weight: 700;
+        font-size: 8pt;
+    }
+
+    QCheckBox#driveUploadCB {
+        color: #24292f;
+        background: transparent;
+        border: none;
+        font-size: 8.5pt;
+        font-weight: 600;
+        spacing: 6px;
+    }
+    QCheckBox#driveUploadCB::indicator {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #d0d7de;
+        border-radius: 4px;
+        background: #ffffff;
+    }
+    QCheckBox#driveUploadCB::indicator:hover {
+        border-color: #0969da;
+    }
+    QCheckBox#driveUploadCB::indicator:checked {
+        background: #0969da;
+        border-color: #0969da;
+    }
+    QCheckBox#driveUploadCB:hover {
+        color: #0969da;
+    }
+
+    QLineEdit#driveFolderIDLE {
+        background: #f6f8fa;
+        color: #8c959f;
+        border: 1px solid #e1e4e8;
+        border-radius: 5px;
+        padding: 4px 8px;
+        font-size: 8.5pt;
+    }
+    QLineEdit#driveFolderIDLE:enabled {
+        background: #ffffff;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+    }
+    QLineEdit#driveFolderIDLE:enabled:hover {
+        border-color: #0969da;
+    }
+    QLineEdit#driveFolderIDLE:enabled:focus {
+        border-color: #0969da;
+        background: #ffffff;
+    }
+    """
+    dlg.setStyleSheet(qss)
+
+def _apply_theme_by_mode(dlg, dark_mode=True):
+    """Aplica la hoja de estilo correspondiente (clara u oscura) al diálogo."""
+    if dark_mode:
+        _apply_dark_theme(dlg)
+    else:
+        _apply_light_theme(dlg)
 
 # =========================================================================
 # NUEVO LAYOUT - SIDEBAR + STACKED WIDGET
@@ -852,13 +1938,23 @@ def _rebuild_layout(dlg):
     ttl.setObjectName("headerTitle")
     ver = QLabel("Version 7.4.7")
     ver.setObjectName("headerVersion")
+    
+    # Botón de alternancia de tema
+    from PyQt5.QtWidgets import QPushButton
+    if not hasattr(dlg, 'PBtheme') or dlg.PBtheme is None:
+        dlg.PBtheme = QPushButton()
+        dlg.PBtheme.setObjectName("PBtheme")
+    dlg.PBtheme.setParent(hdr)
+
     dlg.PBayuda.setParent(hdr)
     dlg.PBayuda.setText("❓ Ayuda")
     hl.addWidget(ttl)
     hl.addStretch()
     hl.addWidget(ver)
+    hl.addWidget(dlg.PBtheme)
     hl.addWidget(dlg.PBayuda)
     dlg.PBayuda.show()
+    dlg.PBtheme.show()
     root.addWidget(hdr)
 
     # BODY
@@ -988,33 +2084,57 @@ def _rebuild_layout(dlg):
 
 # -------------------------------------------------------------------------
 def _force_combo_dark(dlg):
-    """Fuerza estilos oscuros en combos que ignoran el QSS global."""
-    # Combos Qt estandar — incluye dropdown list
-    dark = (
-        "QComboBox{"
-        "background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
-        "border-radius:5px;padding:3px 8px;}"
-        "QComboBox:hover{border-color:#58a6ff;}"
-        "QComboBox::drop-down{border:none;width:20px;}"
-        "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
-        "border-right:4px solid transparent;border-top:5px solid #8b949e;"
-        "margin-right:6px;}"
-        "QComboBox QAbstractItemView{background:#1f2937;color:#e6edf3;"
-        "border:1px solid #30363d;border-radius:4px;"
-        "selection-background-color:#1d4ed8;selection-color:#fff;"
-        "outline:none;}"
-    )
+    """Fuerza estilos en combos que ignoran el QSS global, según el tema activo."""
+    dark_mode = getattr(dlg, '_is_dark_mode', True)
+    if dark_mode:
+        # Combos Qt estandar — incluye dropdown list (Oscuro)
+        dark = (
+            "QComboBox{"
+            "background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
+            "border-radius:5px;padding:3px 8px;}"
+            "QComboBox:hover{border-color:#58a6ff;}"
+            "QComboBox::drop-down{border:none;width:20px;}"
+            "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
+            "border-right:4px solid transparent;border-top:5px solid #8b949e;"
+            "margin-right:6px;}"
+            "QComboBox QAbstractItemView{background:#1f2937;color:#e6edf3;"
+            "border:1px solid #30363d;border-radius:4px;"
+            "selection-background-color:#1d4ed8;selection-color:#fff;"
+            "outline:none;}"
+        )
+        qgs = ("QgsMapLayerComboBox{background:#1f2937;color:#e6edf3;"
+               "border:1px solid #30363d;border-radius:5px;padding:2px 8px;}"
+               "QgsMapLayerComboBox QAbstractItemView{background:#1f2937;"
+               "color:#e6edf3;border:1px solid #30363d;"
+               "selection-background-color:#3b82f6;selection-color:#fff;}")
+    else:
+        # Combos Qt estandar — incluye dropdown list (Claro)
+        dark = (
+            "QComboBox{"
+            "background:#ffffff;color:#24292f;border:1px solid #d0d7de;"
+            "border-radius:5px;padding:3px 8px;}"
+            "QComboBox:hover{border-color:#0969da;}"
+            "QComboBox::drop-down{border:none;width:20px;}"
+            "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
+            "border-right:4px solid transparent;border-top:5px solid #57606a;"
+            "margin-right:6px;}"
+            "QComboBox QAbstractItemView{background:#ffffff;color:#24292f;"
+            "border:1px solid #d0d7de;border-radius:4px;"
+            "selection-background-color:#0969da;selection-color:#fff;"
+            "outline:none;}"
+        )
+        qgs = ("QgsMapLayerComboBox{background:#ffffff;color:#24292f;"
+               "border:1px solid #d0d7de;border-radius:5px;padding:2px 8px;}"
+               "QgsMapLayerComboBox QAbstractItemView{background:#ffffff;"
+               "color:#24292f;border:1px solid #d0d7de;"
+               "selection-background-color:#0969da;selection-color:#fff;}")
+
     for w in [dlg.CBselectDatabase, dlg.CBselectScheme,
               dlg.QCB_Filtro, dlg.combo_Paises,
               dlg.QCB_columna_exp, dlg.QCB_formato_exp, dlg.QCB_columnaIA]:
         try: w.setStyleSheet(dark)
         except Exception: pass
     # QgsMapLayerComboBox — necesitan estilo directo
-    qgs = ("QgsMapLayerComboBox{background:#1f2937;color:#e6edf3;"
-           "border:1px solid #30363d;border-radius:5px;padding:2px 8px;}"
-           "QgsMapLayerComboBox QAbstractItemView{background:#1f2937;"
-           "color:#e6edf3;border:1px solid #30363d;"
-           "selection-background-color:#3b82f6;selection-color:#fff;}")
     layer_combos = [
         dlg.QMLCBmv_mv, dlg.QMLCBmv_placas,
         dlg.QMLCBplacas_pl, dlg.QMLCBmavvial_pl,
@@ -1038,6 +2158,7 @@ def _switch_module(dlg, idx):
     collapsed = not getattr(dlg, '_sidebar_expanded', True)
     align = "center" if collapsed else "left"
     pad   = "0px"    if collapsed else "10px"
+    dark_mode = getattr(dlg, '_is_dark_mode', True)
     for i, (btn, col) in enumerate(dlg._mod_btns):
         if i == idx:
             btn.setChecked(True)
@@ -1048,13 +2169,22 @@ def _switch_module(dlg, idx):
             )
         else:
             btn.setChecked(False)
-            btn.setStyleSheet(
-                f"QPushButton{{background-color:transparent;color:#8b949e;"
-                f"border:none;border-left:4px solid transparent;border-radius:4px;"
-                f"font-weight:500;text-align:{align};padding-left:{pad};}}"
-                f"QPushButton:hover{{background-color:#21262d;color:#c9d1d9;"
-                f"border-left:4px solid #30363d;}}"
-            )
+            if dark_mode:
+                btn.setStyleSheet(
+                    f"QPushButton{{background-color:transparent;color:#8b949e;"
+                    f"border:none;border-left:4px solid transparent;border-radius:4px;"
+                    f"font-weight:500;text-align:{align};padding-left:{pad};}}"
+                    f"QPushButton:hover{{background-color:#21262d;color:#c9d1d9;"
+                    f"border-left:4px solid #30363d;}}"
+                )
+            else:
+                btn.setStyleSheet(
+                    f"QPushButton{{background-color:transparent;color:#57606a;"
+                    f"border:none;border-left:4px solid transparent;border-radius:4px;"
+                    f"font-weight:500;text-align:{align};padding-left:{pad};}}"
+                    f"QPushButton:hover{{background-color:#eaeef2;color:#24292f;"
+                    f"border-left:4px solid #d0d7de;}}"
+                )
 
 # -------------------------------------------------------------------------
 def _toggle_sidebar(dlg):
@@ -1287,29 +2417,8 @@ def _build_page_export(dlg):
     dlg.QTW_export_capas.setEditTriggers(QTableWidget.NoEditTriggers)
     dlg.QTW_export_capas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
     dlg.QTW_export_capas.setMinimumHeight(200)
-    dlg.QTW_export_capas.setStyleSheet(
-        "QTableWidget{background:#0d1117;color:#e6edf3;border:1px solid #30363d;"
-        "border-radius:6px;gridline-color:#21262d;font-size:8.5pt;}"
-        "QTableWidget::item{padding:3px 6px;}"
-        "QTableWidget::item:selected{background:transparent;}"
-        "QHeaderView::section{background:#161b22;color:#58a6ff;border:none;"
-        "border-bottom:1px solid #30363d;padding:4px 8px;font-weight:700;font-size:8pt;}"
-    )
+    dlg.QTW_export_capas.setObjectName("exportCapasTable")
     vl1.addWidget(dlg.QTW_export_capas, 1)
-
-    # ── Parámetros: columna y formato ─────────────────────────────────────
-    _combo_dark = (
-        "QComboBox{background:#1f2937;color:#e6edf3;border:1px solid #30363d;"
-        "border-radius:5px;padding:3px 8px;}"
-        "QComboBox:hover{border-color:#58a6ff;}"
-        "QComboBox::drop-down{border:none;width:20px;}"
-        "QComboBox::down-arrow{image:none;border-left:4px solid transparent;"
-        "border-right:4px solid transparent;border-top:5px solid #8b949e;"
-        "margin-right:6px;}"
-        "QComboBox QAbstractItemView{background:#1f2937;color:#e6edf3;"
-        "border:1px solid #30363d;border-radius:4px;"
-        "selection-background-color:#1d4ed8;selection-color:#fff;outline:none;}"
-    )
 
     params_row = QHBoxLayout(); params_row.setSpacing(12)
 
@@ -1318,14 +2427,12 @@ def _build_page_export(dlg):
     dlg.QCB_columna_exp.setObjectName("QCB_columna_exp")
     dlg.QCB_columna_exp.addItems(['produccion', 'Geolocalizacion', 'Geomarketing'])
     dlg.QCB_columna_exp.setFixedHeight(28)
-    dlg.QCB_columna_exp.setStyleSheet(_combo_dark)
 
     l_fmt = QLabel("Formato:"); l_fmt.setObjectName("connLabel")
     dlg.QCB_formato_exp = QComboBox()
     dlg.QCB_formato_exp.setObjectName("QCB_formato_exp")
     dlg.QCB_formato_exp.addItems(['shp', 'csv', 'gpkg'])
     dlg.QCB_formato_exp.setFixedHeight(28)
-    dlg.QCB_formato_exp.setStyleSheet(_combo_dark)
 
     params_row.addWidget(l_col)
     params_row.addWidget(dlg.QCB_columna_exp, 1)
@@ -1339,32 +2446,16 @@ def _build_page_export(dlg):
 
     # ── Fila superior: Servicio Drive (checkbox + folder ID) ──────────────
     dlg.CB_drive_upload = QCheckBox("☁️  Drive")
-    dlg.CB_drive_upload.setObjectName("CB_drive_upload")
+    dlg.CB_drive_upload.setObjectName("driveUploadCB")
     dlg.CB_drive_upload.setToolTip(
         "Si está activo, sube la carpeta exportada a Google Drive al finalizar"
     )
-    dlg.CB_drive_upload.setStyleSheet(
-        "QCheckBox{color:#c9d1d9;background:transparent;border:none;"
-        "font-size:8.5pt;font-weight:600;spacing:6px;}"
-        "QCheckBox::indicator{width:16px;height:16px;border:2px solid #30363d;"
-        "border-radius:4px;background:#1f2937;}"
-        "QCheckBox::indicator:hover{border-color:#58a6ff;}"
-        "QCheckBox::indicator:checked{background:#1d4ed8;border-color:#3b82f6;}"
-        "QCheckBox:hover{color:#58a6ff;}"
-    )
 
     dlg.QLE_drive_folder_id = QLineEdit()
-    dlg.QLE_drive_folder_id.setObjectName("QLE_drive_folder_id")
+    dlg.QLE_drive_folder_id.setObjectName("driveFolderIDLE")
     dlg.QLE_drive_folder_id.setPlaceholderText("ID de la carpeta destino en Google Drive...")
     dlg.QLE_drive_folder_id.setEnabled(False)
     dlg.QLE_drive_folder_id.setFixedHeight(30)
-    dlg.QLE_drive_folder_id.setStyleSheet(
-        "QLineEdit{background:#161b22;color:#484f58;border:1px solid #21262d;"
-        "border-radius:5px;padding:4px 8px;font-size:8.5pt;}"
-        "QLineEdit:enabled{background:#1f2937;color:#e6edf3;border:1px solid #30363d;}"
-        "QLineEdit:enabled:hover{border-color:#58a6ff;}"
-        "QLineEdit:enabled:focus{border-color:#3b82f6;background:#1c2333;}"
-    )
 
     l_folder = QLabel("📁  Folder ID:"); l_folder.setObjectName("connLabel")
     l_folder.setFixedWidth(90)
@@ -1439,19 +2530,35 @@ def _build_page_nexa(dlg):
         dlg.QERCW_rutaIA.setStyleSheet(
             "QgsFileWidget, QWidget { background: transparent; border: none; }"
         )
+        dark_mode = getattr(dlg, '_is_dark_mode', True)
         _le = dlg.QERCW_rutaIA.findChild(_QLE)
         if _le:
-            _le.setStyleSheet(
-                "background-color: #1f2937; color: #e6edf3; "
-                "border: 1px solid #30363d; border-radius: 5px; "
-                "padding: 4px 8px; font-size: 8.5pt;"
-            )
+            if dark_mode:
+                _le.setStyleSheet(
+                    "background-color: #1f2937; color: #e6edf3; "
+                    "border: 1px solid #30363d; border-radius: 5px; "
+                    "padding: 4px 8px; font-size: 8.5pt;"
+                )
+            else:
+                _le.setStyleSheet(
+                    "background-color: #ffffff; color: #24292f; "
+                    "border: 1px solid #d0d7de; border-radius: 5px; "
+                    "padding: 4px 8px; font-size: 8.5pt;"
+                )
         for _tb in dlg.QERCW_rutaIA.findChildren(_QTB):
-            _tb.setStyleSheet(
-                "background-color: #21262d; color: #c9d1d9; "
-                "border: 1px solid #30363d; border-radius: 4px; "
-                "padding: 3px 8px; font-size: 8pt; min-height: 22px;"
-            )
+            if dark_mode:
+                _tb.setStyleSheet(
+                    "background-color: #21262d; color: #c9d1d9; "
+                    "border: 1px solid #30363d; border-radius: 4px; "
+                    "padding: 3px 8px; font-size: 8pt; min-height: 22px;"
+                )
+            else:
+                _tb.setStyleSheet(
+                    "background-color: #f6f8fa; color: #24292f; "
+                    "border: 1px solid #d0d7de; border-radius: 4px; "
+                    "padding: 3px 8px; font-size: 8pt; min-height: 22px;"
+                )
+    dlg._style_rutaIA = _style_rutaIA
     from PyQt5.QtCore import QTimer
     QTimer.singleShot(0, _style_rutaIA)
     grid2.addWidget(l_cap, 0, 0); grid2.addWidget(dlg.QMLCB_CapaIA, 0, 1)
@@ -1535,6 +2642,45 @@ def _build_page_actas(dlg):
     grid.addWidget(l_carpeta,              0, 0)
     grid.addWidget(dlg.QERCW_CarpetaActa, 0, 1)
 
+    # Actualización estilo widget folder selector
+    def _style_carpetaActa():
+        from PyQt5.QtWidgets import QLineEdit as _QLE, QToolButton as _QTB
+        dlg.QERCW_CarpetaActa.setStyleSheet(
+            "QgsFileWidget, QWidget { background: transparent; border: none; }"
+        )
+        dark_mode = getattr(dlg, '_is_dark_mode', True)
+        _le = dlg.QERCW_CarpetaActa.findChild(_QLE)
+        if _le:
+            if dark_mode:
+                _le.setStyleSheet(
+                    "background-color: #1f2937; color: #e6edf3; "
+                    "border: 1px solid #30363d; border-radius: 5px; "
+                    "padding: 4px 8px; font-size: 8.5pt;"
+                )
+            else:
+                _le.setStyleSheet(
+                    "background-color: #ffffff; color: #24292f; "
+                    "border: 1px solid #d0d7de; border-radius: 5px; "
+                    "padding: 4px 8px; font-size: 8.5pt;"
+                )
+        for _tb in dlg.QERCW_CarpetaActa.findChildren(_QTB):
+            if dark_mode:
+                _tb.setStyleSheet(
+                    "background-color: #21262d; color: #c9d1d9; "
+                    "border: 1px solid #30363d; border-radius: 4px; "
+                    "padding: 3px 8px; font-size: 8pt; min-height: 22px;"
+                )
+            else:
+                _tb.setStyleSheet(
+                    "background-color: #f6f8fa; color: #24292f; "
+                    "border: 1px solid #d0d7de; border-radius: 4px; "
+                    "padding: 3px 8px; font-size: 8pt; min-height: 22px;"
+                )
+
+    dlg._style_carpetaActa = _style_carpetaActa
+    from PyQt5.QtCore import QTimer
+    QTimer.singleShot(0, _style_carpetaActa)
+
     # Número de acta
     l_num = QLabel("N° de Acta:"); l_num.setObjectName("connLabel")
     dlg.QLE_num_acta = QLineEdit()
@@ -1599,46 +2745,30 @@ def _build_page_val_latam(dlg):
 
     # ── Scroll para que el contenido no se corte ──────────────────────────
     scroll = QScrollArea()
+    scroll.setObjectName("valLatamScroll")
     scroll.setWidgetResizable(True)
     scroll.setFrameShape(QFrame.NoFrame)
-    scroll.setStyleSheet(
-        "QScrollArea{background:#0d1117;border:none;}"
-        "QScrollBar:vertical{background:#0d1117;width:6px;}"
-        "QScrollBar::handle:vertical{background:#30363d;border-radius:3px;}"
-    )
 
     inner = QWidget(); inner.setObjectName("valLatamInner")
-    inner.setStyleSheet("background:#0d1117;")
     lay = QVBoxLayout(inner)
     lay.setContentsMargins(20, 16, 20, 20)
     lay.setSpacing(16)
 
     # ── Header degradado ──────────────────────────────────────────────────
     hdr_frame = QFrame()
-    hdr_frame.setStyleSheet(
-        "QFrame{background:qlineargradient(x1:0,y1:0,x2:1,y2:1,"
-        "stop:0 #052e16,stop:0.5 #064e3b,stop:1 #0d1117);"
-        "border-radius:12px;border:1px solid #10b981;}"
-    )
+    hdr_frame.setObjectName("valLatamHdrFrame")
     hdr_frame.setMinimumHeight(100)
     hdr_lay = QVBoxLayout(hdr_frame)
     hdr_lay.setContentsMargins(24, 16, 24, 16)
     hdr_lay.setSpacing(4)
 
     lbl_titulo = QLabel("🌎  Validaciones Cartográficas LATAM")
+    lbl_titulo.setObjectName("valLatamTitle")
     lbl_titulo.setAlignment(Qt.AlignCenter)
-    lbl_titulo.setStyleSheet(
-        "color:#6ee7b7;font-size:18pt;font-weight:800;"
-        "background:transparent;border:none;"
-        "letter-spacing:1px;"
-    )
 
     lbl_sub = QLabel("Herramienta de validación geoespacial para Latinoamérica")
+    lbl_sub.setObjectName("valLatamSub")
     lbl_sub.setAlignment(Qt.AlignCenter)
-    lbl_sub.setStyleSheet(
-        "color:#10b981;font-size:9pt;font-weight:500;"
-        "background:transparent;border:none;"
-    )
 
     hdr_lay.addWidget(lbl_titulo)
     hdr_lay.addWidget(lbl_sub)
@@ -1668,12 +2798,8 @@ def _build_page_val_latam(dlg):
     )
 
     lbl_desc = QLabel(desc_texto)
-    lbl_desc.setObjectName("descLabel")
+    lbl_desc.setObjectName("valLatamDesc")
     lbl_desc.setWordWrap(True)
-    lbl_desc.setStyleSheet(
-        "color:#c9d1d9;font-size:8.5pt;line-height:1.6;"
-        "background:transparent;border:none;"
-    )
 
     desc_lay.addWidget(lbl_desc_titulo)
     desc_lay.addWidget(lbl_desc)
@@ -1694,11 +2820,9 @@ def _build_page_val_latam(dlg):
 
     # Label que muestra la imagen actual
     dlg._carousel_lbl = QLabel()
+    dlg._carousel_lbl.setObjectName("carouselLabel")
     dlg._carousel_lbl.setAlignment(Qt.AlignCenter)
     dlg._carousel_lbl.setMinimumHeight(160)
-    dlg._carousel_lbl.setStyleSheet(
-        "background:#0d1117;border-radius:8px;border:1px solid #21262d;"
-    )
     carousel_lay.addWidget(dlg._carousel_lbl, 1)
 
     # Indicadores de punto (dots)
@@ -1708,18 +2832,15 @@ def _build_page_val_latam(dlg):
     dlg._carousel_dots = []
     for _ in PAISES:
         dot = QLabel("●")
-        dot.setStyleSheet("color:#30363d;font-size:8pt;background:transparent;border:none;")
+        dot.setStyleSheet("background:transparent;border:none;")
         dots_row.addWidget(dot)
         dlg._carousel_dots.append(dot)
     carousel_lay.addLayout(dots_row)
 
     # Nombre del país actual
     dlg._carousel_pais_lbl = QLabel("")
+    dlg._carousel_pais_lbl.setObjectName("carouselPaisLbl")
     dlg._carousel_pais_lbl.setAlignment(Qt.AlignCenter)
-    dlg._carousel_pais_lbl.setStyleSheet(
-        "color:#10b981;font-size:8pt;font-weight:600;"
-        "background:transparent;border:none;"
-    )
     carousel_lay.addWidget(dlg._carousel_pais_lbl)
 
     lay.addWidget(carousel_frame)
@@ -1733,12 +2854,6 @@ def _build_page_val_latam(dlg):
     dlg.PBcheck_update_val_latam = QPushButton("🔄  Buscar Actualización del Sub-complemento")
     dlg.PBcheck_update_val_latam.setObjectName("PBcheck_update_val_latam")
     dlg.PBcheck_update_val_latam.setFixedHeight(34)
-    dlg.PBcheck_update_val_latam.setStyleSheet(
-        "QPushButton{background-color:#1c2128;color:#7d8590;border:1px solid #30363d;"
-        "border-radius:6px;font-size:8.5pt;font-weight:500;padding:4px 14px;}"
-        "QPushButton:hover{background-color:#21262d;color:#c9d1d9;border-color:#58a6ff;}"
-        "QPushButton:pressed{background-color:#161b22;}"
-    )
     lay.addWidget(dlg.PBcheck_update_val_latam)
     lay.addStretch()
 
@@ -1756,6 +2871,7 @@ def _build_page_val_latam(dlg):
     def _carousel_load(idx):
         """Carga la imagen del país en el índice dado."""
         pais = PAISES[idx]
+        dark_mode = getattr(dlg, '_is_dark_mode', True)
         # Intentar png y jpg
         img_path = None
         for ext in (".png", ".jpg", ".jpeg", ".PNG", ".JPG"):
@@ -1783,18 +2899,31 @@ def _build_page_val_latam(dlg):
             dlg._carousel_lbl.setText(
                 f"📁  Coloca {pais}.png en la carpeta images/"
             )
-            dlg._carousel_lbl.setStyleSheet(
-                "color:#484f58;font-size:9pt;background:#0d1117;"
-                "border-radius:8px;border:1px dashed #30363d;"
-            )
+            if dark_mode:
+                dlg._carousel_lbl.setStyleSheet(
+                    "color:#484f58;font-size:9pt;background:#0d1117;"
+                    "border-radius:8px;border:1px dashed #30363d;"
+                )
+            else:
+                dlg._carousel_lbl.setStyleSheet(
+                    "color:#8c959f;font-size:9pt;background:#ffffff;"
+                    "border-radius:8px;border:1px dashed #d0d7de;"
+                )
 
         # Actualizar dots
         for i, dot in enumerate(dlg._carousel_dots):
-            dot.setStyleSheet(
-                "color:#10b981;font-size:10pt;background:transparent;border:none;"
-                if i == idx else
-                "color:#30363d;font-size:8pt;background:transparent;border:none;"
-            )
+            if dark_mode:
+                dot.setStyleSheet(
+                    "color:#10b981;font-size:10pt;background:transparent;border:none;"
+                    if i == idx else
+                    "color:#30363d;font-size:8pt;background:transparent;border:none;"
+                )
+            else:
+                dot.setStyleSheet(
+                    "color:#1a7f37;font-size:10pt;background:transparent;border:none;"
+                    if i == idx else
+                    "color:#d0d7de;font-size:8pt;background:transparent;border:none;"
+                )
 
         dlg._carousel_pais_lbl.setText(nombres_display.get(pais, pais.title()))
 

@@ -34,7 +34,7 @@ class Validaciones_LATAM:
         self._dock = None
 
     def tr(self, message):
-        return QCoreApplication.translate('Validaciones_LATAM', message)
+        return QCoreApplication.translate('GeoSuite LATAM', message)
 
     def add_action(
         self,
@@ -89,7 +89,7 @@ class Validaciones_LATAM:
     def unload(self):
         """Limpia menú, barra de herramientas y cierra el dock si estaba abierto."""
         for action in self.actions:
-            self.iface.removePluginMenu(self.tr(u'&Validaciones_LATAM'), action)
+            self.iface.removePluginMenu(self.tr(u'&GeoSuite LATAM'), action)
             self.iface.removeToolBarIcon(action)
 
         if self._dock is not None:

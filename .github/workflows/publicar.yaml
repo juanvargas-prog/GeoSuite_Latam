@@ -1,0 +1,26 @@
+name: Generar ZIP del Complemento
+
+on:
+  push:
+    branches:
+      - main  # Se activa cada vez que subes cambios a la rama main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Crear carpeta limpia y comprimir
+        run: |
+          mkdir GeoSuite_Latam
+          # Copia todo excepto las carpetas de Git y el propio workflow
+          rsync -av --exclude='.git*' --exclude='.github' ./ GeoSuite_Latam/
+          zip -r GeoSuite_Latam.zip GeoSuite_Latam/
+
+      - name: Subir el ZIP a una sección pública (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: complemento-zip
+          path: GeoSuite_Latam.zip
