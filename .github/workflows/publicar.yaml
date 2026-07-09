@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Permiso obligatorio para crear el Release
+      contents: write  # Permiso obligatorio para que el robot pueda crear el Release
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
           zip -r GeoSuite_Latam.zip GeoSuite_Latam/
 
       - name: Publicar ZIP en Release Automático
-        uses: "marvinpinto/action-automatic-releases@latest"  # Reemplazo oficial y actualizado
+        uses: itemprop/gh-action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
