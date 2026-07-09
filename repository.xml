@@ -9,6 +9,6 @@
         <homepage>https://github.com/juanvargas-prog/GeoSuite_Latam</homepage>
         <file_name>GeoSuite_Latam.zip</file_name>
         <icon>icon.png</icon>
-        <download_url>https://github.com/juanvargas-prog/GeoSuite_Latam/actions/runs/29038637469/artifacts/8207002139</download_url>
+        <download_url>https://github.com/juanvargas-prog/GeoSuite_Latam/releases/download/latest/GeoSuite_Latam.zip</download_url>
     </pyqgis_plugin>
 </plugins>
