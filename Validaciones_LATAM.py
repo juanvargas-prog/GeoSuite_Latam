@@ -123,7 +123,7 @@ class Validaciones_LATAM:
             self._dock = QDockWidget("  🌎  GeoSuite LATAM", self.iface.mainWindow())
             self._dock.setObjectName("GeoSuiteLatamDock")
             self._dock.setWidget(panel_widget)
-            self._dock.setMinimumWidth(980)
+            self._dock.setMinimumWidth(280)
             self._dock.setAllowedAreas(
                 Qt.LeftDockWidgetArea  |
                 Qt.RightDockWidgetArea |

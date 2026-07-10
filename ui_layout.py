@@ -1927,6 +1927,7 @@ def _rebuild_layout(dlg):
     root = QVBoxLayout(dlg)
     root.setContentsMargins(0, 0, 0, 0)
     root.setSpacing(0)
+    root.setSizeConstraint(QVBoxLayout.SetNoConstraint)
 
     # HEADER BAR
     hdr = QFrame()
@@ -1963,12 +1964,13 @@ def _rebuild_layout(dlg):
     bl = QHBoxLayout(body)
     bl.setContentsMargins(0, 0, 0, 0)
     bl.setSpacing(0)
+    bl.setSizeConstraint(QHBoxLayout.SetNoConstraint)
     root.addWidget(body, 1)
 
     # --- SIDEBAR ---
     dlg._sidebar = QFrame()
     dlg._sidebar.setObjectName("sidebar")
-    dlg._sidebar_w = 240
+    dlg._sidebar_w = 200
     dlg._sidebar.setFixedWidth(dlg._sidebar_w)
     dlg._sidebar_expanded = True
     sl = QVBoxLayout(dlg._sidebar)
@@ -2020,6 +2022,7 @@ def _rebuild_layout(dlg):
     rl = QVBoxLayout(rp)
     rl.setContentsMargins(10, 10, 10, 8)
     rl.setSpacing(8)
+    rl.setSizeConstraint(QVBoxLayout.SetNoConstraint)
     bl.addWidget(rp, 1)
 
     # PANEL CONEXION (siempre visible)
@@ -2061,6 +2064,15 @@ def _rebuild_layout(dlg):
     dlg._stack.addWidget(_build_page_export(dlg))        # 4
     dlg._stack.addWidget(_build_page_nexa(dlg))          # 5
     dlg._stack.addWidget(_build_page_actas(dlg))         # 6
+
+    # Envolvemos el stack en un scroll area: si la pagina no cabe en el espacio disponible,
+    # aparecen scrollbars en vez de bloquear el resize de la ventana/panel.
+    dlg._stack_scroll = QScrollArea()
+    dlg._stack_scroll.setObjectName("mainStackScroll")
+    dlg._stack_scroll.setWidgetResizable(True)
+    dlg._stack_scroll.setFrameShape(QFrame.NoFrame)
+    dlg._stack_scroll.setWidget(dlg._stack)
+    rl.addWidget(dlg._stack_scroll, 1)
 
     # STATUS BAR
     dlg.mostrarProceso.setParent(rp)

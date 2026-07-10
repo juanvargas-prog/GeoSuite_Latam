@@ -130,7 +130,7 @@ class Validaciones_LATAMDialog(QtWidgets.QDialog, FORM_CLASS):
             _Qt.WindowCloseButtonHint
         )
         self.setSizeGripEnabled(True)
-        self.setMinimumSize(980, 680)
+        self.setMinimumSize(640, 460)
         self.resize(1150, 830)
         self.setWindowTitle("  GeoSuite LATAM  ")
         self._init_shared()
@@ -3531,7 +3531,7 @@ class GeoSuitePanelWidget(QtWidgets.QWidget, FORM_CLASS):
     def __init__(self, parent=None):
         super(GeoSuitePanelWidget, self).__init__(parent)
         self.setupUi(self)
-        self.setMinimumSize(960, 600)
+        self.setMinimumSize(420, 360)
         self._init_shared()
 
 
