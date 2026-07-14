@@ -8,7 +8,7 @@ from .resources import *
 # Import the code for the dialog
 from .Validaciones_LATAM_dialog import Validaciones_LATAMDialog, GeoSuitePanelWidget
 import os.path
-
+import shutil
 
 class Validaciones_LATAM:
     """QGIS Plugin Implementation."""
@@ -16,6 +16,10 @@ class Validaciones_LATAM:
     def __init__(self, iface):
         self.iface = iface
         self.plugin_dir = os.path.dirname(__file__)
+
+        # AUTORECUPERACIÓN  DE CREDENCIALES
+        self.restaurar_credenciales()
+
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
             self.plugin_dir,
@@ -32,6 +36,37 @@ class Validaciones_LATAM:
         self.first_start = None
         # Referencia al DockWidget (None si no está creado)
         self._dock = None
+
+    def restaurar_credenciales(self):
+        """
+        Verifica si existen las credenciales en la carpeta segura del usuario y las copia de vuelta a la carpeta del plugin si es necesario.
+        """
+        # Definir la ruta segura fuera de QGIS (ej: C:/Users/NombreUsuario/.geosuite_latam)
+        user_home = os.path.expanduser("~")
+        safe_config_dir = os.path.join(user_home, ".geosuite_latam")
+        
+        # Si la carpeta segura no existe en la PC del usuario, la creamos
+        if not os.path.exists(safe_config_dir):
+            try:
+                os.makedirs(safe_config_dir)
+            except Exception:
+                pass
+
+        # Lista de archivos confidenciales  que queremos blindar
+        credenciales = [".env", "client_secret.json"]
+
+        for archivo in credenciales:
+            ruta_segura = os.path.join(safe_config_dir, archivo)
+            ruta_plugin = os.path.join(self.plugin_dir, archivo)
+
+            # Si el archivo vive seguro afuera, pero no está dentro del plugin (por una actualización)
+            if os.path.exists(ruta_segura) and not os.path.exists(ruta_plugin):
+                try:
+                    shutil.copy(ruta_segura, ruta_plugin)
+                except Exception:
+                    # Falla silenciosa si hay problemas de permisos al copiar
+                    print("Error al copiar el archivo ")
+                    pass
 
     def tr(self, message):
         return QCoreApplication.translate('GeoSuite LATAM', message)

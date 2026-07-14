@@ -1937,7 +1937,7 @@ def _rebuild_layout(dlg):
     hl.setContentsMargins(18, 0, 14, 0)
     ttl = QLabel("🌎  GEOSUITE LATAM")
     ttl.setObjectName("headerTitle")
-    ver = QLabel("Version 7.4.7")
+    ver = QLabel("Version 1.0.2")
     ver.setObjectName("headerVersion")
     
     # Botón de alternancia de tema
